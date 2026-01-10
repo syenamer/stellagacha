@@ -1,0 +1,641 @@
+---
+import Layout from '../layouts/Layout.astro';
+import itemsData from '../data/items.json';
+---
+
+<Layout title="가챠">
+  <div class="container">
+    <h1>✨ 랜덤 박스 가챠 ✨</h1>
+
+    <div class="gacha-section">
+      <div class="gacha-types">
+        <div class="gacha-box normal-box">
+          <div class="box-animation">
+            <div class="gift-box">📦</div>
+          </div>
+          <h3>일반 랜덤 박스</h3>
+          <p class="box-subtitle">일반 등급 아이템 획득</p>
+          <button id="normalGachaBtn" class="gacha-btn normal-btn">
+            <span class="btn-text">5연차 가챠!</span>
+          </button>
+        </div>
+
+        <div class="gacha-box premium-box">
+          <div class="box-animation">
+            <div class="gift-box premium">🎁</div>
+          </div>
+          <h3>고급 랜덤 박스</h3>
+          <p class="box-subtitle">희귀 등급 아이템 등장!</p>
+          <button id="premiumGachaBtn" class="gacha-btn premium-btn">
+            <span class="btn-sparkle">✨</span>
+            <span class="btn-text">3연차 가챠!</span>
+            <span class="btn-sparkle">✨</span>
+          </button>
+        </div>
+      </div>
+
+      <div id="result" class="result-section" style="display:none;">
+        <div class="result-header">
+          <h2 id="resultTitle">🎉 가챠 결과 🎉</h2>
+        </div>
+
+        <div id="captureArea" class="capture-area">
+          <div class="capture-header">
+            <div class="cap-left">
+              <div class="cap-badge">ASTROLABE</div>
+              <div class="cap-title" id="capTitle">랜덤 박스 결과</div>
+              <div class="cap-sub" id="capSub">—</div>
+            </div>
+
+            <div class="cap-right">
+              <div class="cap-tag" id="capTag">NORMAL</div>
+              <div class="cap-time" id="capTime">0000-00-00 00:00</div>
+            </div>
+          </div>
+
+          <div id="itemGrid" class="item-grid"></div>
+
+          <div class="capture-footer">
+            <div class="cap-foot-left">© 낙성종언</div>
+            <div class="cap-foot-right" id="capFootRight">ASTROLABE SYSTEM</div>
+          </div>
+        </div>
+
+        <button id="downloadBtn" class="download-btn">
+          <span>📥</span> 이미지로 저장하기
+        </button>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style is:global>
+/* =========================
+   PAGE
+========================= */
+.gacha-section{ text-align:center; position:relative; }
+
+.gacha-types{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:3rem;
+  margin:2rem auto 3rem;
+  max-width:900px;
+}
+
+.gacha-box{
+  background:linear-gradient(135deg,#f0f8ff 0%,#ffffff 100%);
+  padding:2.5rem;
+  border-radius:25px;
+  border:3px solid #e3f2fd;
+  transition:all .3s;
+}
+.normal-box{ border-color:#b0bec5; }
+.premium-box{
+  border-color:#ffd700;
+  background:linear-gradient(135deg,#fffaf0 0%,#fff8dc 100%);
+}
+
+.gift-box{ font-size:6rem; animation:float 3s ease-in-out infinite; }
+.gift-box.premium{ animation:floatPremium 3s ease-in-out infinite; }
+@keyframes float{ 0%,100%{transform:translateY(0)} 50%{transform:translateY(-15px)} }
+@keyframes floatPremium{ 0%,100%{transform:translateY(0) rotate(-5deg)} 50%{transform:translateY(-20px) rotate(5deg)} }
+
+.gacha-btn{
+  font-size:1.3rem;
+  padding:1rem 2rem;
+  display:inline-flex;
+  align-items:center;
+  gap:.5rem;
+  border:none;
+  border-radius:16px;
+  color:#fff;
+  font-weight:900;
+  cursor:pointer;
+}
+.normal-btn{ background:linear-gradient(135deg,#78909c 0%,#90a4ae 100%); }
+.premium-btn{
+  background:linear-gradient(135deg,#daa520 0%,#ffd700 100%);
+  color:#2a1a00;
+}
+
+/* =========================
+   RESULT HEADER
+========================= */
+.result-section{ margin-top:3rem; }
+.result-header{ margin-bottom:1.25rem; }
+.result-header h2{ font-size:2.2rem; font-weight:900; color:#0b2a4a; }
+
+/* =========================
+   CAPTURE AREA (16:9)
+========================= */
+#captureArea{
+  position: relative;
+  aspect-ratio: 16 / 9;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 22px 22px 18px;
+
+  /* ✅ 캡처 안정: 불투명 배경(하얀 캡처 방지) */
+  background: linear-gradient(180deg, #eef9ff 0%, #d6efff 55%, #c8e8ff 100%);
+  border: 1px solid rgba(30,120,200,.22);
+
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 12px;
+
+  overflow: hidden; /* 기본은 숨김 */
+}
+
+/* header/footer */
+.capture-header{
+  position: relative;
+  z-index: 3;
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap: 14px;
+  padding: 8px 10px 6px;
+}
+.cap-left{ display:flex; flex-direction:column; gap:6px; align-items:flex-start; }
+
+.cap-badge{
+  font-weight: 900;
+  font-size: 0.72rem;
+  letter-spacing: .14em;
+  color:#0b2a4a;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.55);
+  border: 1px solid rgba(0,120,255,0.18);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 8px 18px rgba(0,70,140,.12);
+}
+.cap-title{
+  font-weight: 1000;
+  font-size: 1.35rem;
+  letter-spacing: -0.03em;
+  color:#07223a;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.75);
+}
+.cap-sub{
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: rgba(7,34,58,0.65);
+}
+
+.cap-right{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  gap: 6px;
+}
+.cap-tag{
+  font-weight: 1000;
+  font-size: 0.75rem;
+  letter-spacing: .10em;
+  padding: 6px 10px;
+  border-radius: 999px;
+  color:#ffffff;
+  background: linear-gradient(180deg, #7bd1ff 0%, #4aa9ff 100%);
+  box-shadow: 0 12px 22px rgba(0,120,255,.22);
+}
+.cap-time{
+  font-size: 0.78rem;
+  color: rgba(7,34,58,0.55);
+}
+
+.capture-footer{
+  position: relative;
+  z-index: 3;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding: 6px 10px 2px;
+  font-size: 0.78rem;
+  color: rgba(7,34,58,0.6);
+}
+.cap-foot-right{
+  font-weight: 900;
+  color: rgba(7,34,58,0.75);
+}
+
+/* =========================
+   GRID (5칸 고정)
+========================= */
+#itemGrid{
+  position: relative;
+  z-index: 3;
+  align-self: center;
+
+  display:grid;
+  grid-template-columns: repeat(5, 170px);
+  gap: 14px;
+  justify-content: center;
+}
+
+/* =========================
+   CARD
+========================= */
+.item-card{
+  width:170px;
+  border-radius:16px;
+  overflow:hidden;
+  background:linear-gradient(180deg,rgba(255,255,255,.92) 0%,rgba(255,255,255,.78) 100%);
+  border:1px solid rgba(35,120,200,.25);
+  box-shadow:0 10px 24px rgba(0,70,140,.18);
+  transition:transform .18s ease, border-color .18s ease;
+}
+
+
+.item-icon-wrapper{
+  position:relative;
+  height:72px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+  padding-top:10px;
+
+  background: transparent;
+  border-bottom:none;
+}
+
+.item-icon{
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  margin-top: 30px;
+}
+
+.rarity-chip{
+  position:absolute;
+  top: 8px;
+  left: 8px;
+
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+
+  height: 23px;
+  padding: 0 10px;
+  border-radius:999px;
+
+  font-weight:900;
+  font-size:.5rem;
+  line-height:1;
+  background:rgba(255,255,255,.55);
+  border:1px solid rgba(0,120,255,.22);
+  color:#0b2a4a;
+}
+.rarity-dot{
+  width:8px; height:8px;
+  flex:0 0 8px;
+  border-radius:999px;
+  background:#2a9df4;
+}
+.rarity-text{ line-height:1; transform: translateY(-0.3px); }
+
+.item-info{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:10px 10px 12px;
+  gap:6px;
+}
+
+.item-name{
+  font-weight:600;
+  font-size:1rem;
+  line-height:1.15;
+  letter-spacing:-.03em;
+  color:#082642;
+  text-align:center;
+  margin:0;
+}
+.item-name.is-long{
+  font-size:0.85rem;
+  letter-spacing:-.04em;
+}
+
+.item-description{
+  --lh: 1.45;
+  font-size: 0.70rem;
+  line-height: var(--lh);
+  color: rgba(8, 38, 66, 0.55);
+  text-align: center;
+  max-width: 130px;
+  word-break: keep-all;
+
+  /* 2줄 고정 + 가운데 정렬 */
+  height: calc(var(--lh) * 1em * 2);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+
+/* =========================
+   DOWNLOAD BTN
+========================= */
+.download-btn{
+  margin-top:18px;
+  padding:12px 22px;
+  border-radius:14px;
+  border:none;
+  cursor:pointer;
+  font-weight:900;
+  color:#fff;
+  background:linear-gradient(180deg,#7bd1ff 0%,#4aa9ff 100%);
+  box-shadow:0 12px 22px rgba(0,120,255,.22);
+}
+
+.item-description{
+  --lh: 1.45;
+  line-height: var(--lh);
+
+  height: calc(var(--lh) * 1em * 2); /* 2줄 높이 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden; /* 줄이기 실패해도 튀어나오진 않게 */
+  text-align: center;
+  max-width: 130px;
+  word-break: keep-all;
+}
+
+.item-card{
+  display: flex;
+  flex-direction: column;
+}
+
+.item-grid{
+  display:grid;
+  grid-template-columns: repeat(5, 170px);
+  gap:14px;
+  justify-content:center;
+
+  align-items:end; /* ✅ 핵심: 같은 줄에서 짧은 애들은 아래 고정 */
+}
+
+.item-description{
+  --lh: 1.45;
+
+  font-size: 0.70rem;
+  line-height: var(--lh);
+  color: rgba(8, 38, 66, 0.55);
+  text-align: center;
+  max-width: 130px;
+  word-break: keep-all;
+
+  /* ✅ 기본은 2줄 박스 고정 + 중앙 정렬 */
+  height: calc(var(--lh) * 1em * 2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+}
+
+
+/* ✅ 긴 설명(3줄 이상)인 카드만 풀어주기 */
+.item-card.desc-long .item-description{
+  height: auto;          /* ✅ 고정 해제 */
+  display: block;        /* ✅ 자연스럽게 줄바꿈 */
+  padding-top: 2px;
+  padding-bottom: 2px;
+  overflow: visible;
+}
+
+.item-grid{
+  --cardH: 260px;               /* ✅ 보통 카드 기준 높이 (원하면 숫자만 조절) */
+
+  display:grid;
+  grid-template-columns: repeat(5, 170px);
+  grid-auto-rows: var(--cardH); /* ✅ 행 높이 고정 */
+  gap:14px;
+  justify-content:center;
+
+  align-items:center;           /* ✅ 다른 카드들 “행 중앙” 유지 */
+  overflow: visible;            /* ✅ 커지는 카드가 위/아래로 튀어나와도 보이게 */
+}
+
+
+</style>
+
+<script define:vars={{ itemsData }}>
+  const normalGachaBtn = document.getElementById('normalGachaBtn');
+  const premiumGachaBtn = document.getElementById('premiumGachaBtn');
+  const resultSection = document.getElementById('result');
+  const resultTitle = document.getElementById('resultTitle');
+  const itemGrid = document.getElementById('itemGrid');
+  const downloadBtn = document.getElementById('downloadBtn');
+
+  const allItems = itemsData.filter((item) => !String(item.icon || '').includes('별빛상자.gif'));
+  const commonItems = allItems.filter((item) => item.rarity === 'common');
+  const rareItems = allItems.filter((item) => item.rarity === 'rare');
+
+  function drawGacha(isPremium = false) {
+    const results = [];
+    const pool = isPremium ? rareItems : commonItems;
+    const count = isPremium ? 3 : 5;
+    for (let i = 0; i < count; i++) results.push(pool[Math.floor(Math.random() * pool.length)]);
+    return results;
+  }
+
+  function setCaptureHeader(boxType){
+    const capTitle = document.getElementById('capTitle');
+    const capSub = document.getElementById('capSub');
+    const capTag = document.getElementById('capTag');
+    const capTime = document.getElementById('capTime');
+    if (!capTitle || !capSub || !capTag || !capTime) return;
+
+    const isPremium = boxType === 'premium';
+    capTitle.textContent = isPremium ? '고급 랜덤 박스 결과' : '일반 랜덤 박스 결과';
+    capSub.textContent = isPremium ? '고급 아이템 획득' : '일반 아이템 획득';
+    capTag.textContent = isPremium ? 'PREMIUM' : 'NORMAL';
+
+    const d = new Date();
+    const pad = (n) => String(n).padStart(2, '0');
+    capTime.textContent =
+      `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())} ` +
+      `${pad(d.getHours())}:${pad(d.getMinutes())}`;
+  }
+
+  // ✅ 히스토리 저장(전역) — displayResults 밖!
+  function saveHistory(results, boxType){
+    try {
+      const history = JSON.parse(localStorage.getItem('gachaHistory') || '[]');
+      history.push({
+        timestamp: Date.now(),
+        boxType, // 'normal' | 'premium'
+        results: results.map(r => ({ name: r.name, rarity: r.rarity }))
+      });
+      localStorage.setItem('gachaHistory', JSON.stringify(history));
+    } catch (e) {
+      console.warn('saveHistory failed:', e);
+    }
+  }
+
+  // ✅ 설명 자동 폰트 축소(2줄 안에 우겨넣기)
+  function fitDescriptions(root){
+    const els = Array.from(root.querySelectorAll('.item-description'));
+    els.forEach((el) => {
+      const base = 0.70; // rem
+      const min  = 0.60; // rem
+      const step = 0.02; // rem
+
+      el.style.fontSize = `${base}rem`;
+
+      // 현재 2줄 허용 높이(px)
+      const cs = getComputedStyle(el);
+      const lh = parseFloat(cs.lineHeight); // px
+      const maxH = lh * 2 + 1; // 오차 여유
+
+      let size = base;
+      while (el.scrollHeight > maxH && size > min) {
+        size = +(size - step).toFixed(2);
+        el.style.fontSize = `${size}rem`;
+      }
+    });
+  }
+
+  // ✅ 3줄 이상인 설명만 “카드 높이 늘리기(desc-long)” 판별
+  function markLongDescriptions(root){
+    const cards = Array.from(root.querySelectorAll('.item-card'));
+    cards.forEach((card) => {
+      card.classList.remove('desc-long');
+
+      const descEl = card.querySelector('.item-description');
+      if (!descEl) return;
+
+      const cs = getComputedStyle(descEl);
+      const lh = parseFloat(cs.lineHeight); // px
+      const twoLines = lh * 2 + 1;
+
+      if (descEl.scrollHeight > twoLines) {
+        card.classList.add('desc-long');
+      }
+    });
+  }
+
+  function displayResults(results, boxType) {
+    if (!itemGrid) return;
+
+    itemGrid.innerHTML = '';
+    setCaptureHeader(boxType);
+
+    resultTitle.textContent = (boxType === 'premium')
+      ? '✨ 고급 랜덤 박스 결과 ✨'
+      : '📦 일반 랜덤 박스 결과 📦';
+
+    results.forEach((item, index) => {
+      const nameClass = item.name.length >= 10 ? 'item-name is-long' : 'item-name';
+      const card = document.createElement('div');
+      card.className = `item-card ${item.rarity}`;
+
+      // ✅ 고급(3개)일 때 가운데 3칸(2,3,4)
+      if (boxType === 'premium') card.style.gridColumn = String(2 + index);
+
+      const rarityLabel = item.rarity === 'rare' ? 'RARE' : 'COMMON';
+
+      card.innerHTML = `
+        <div class="item-icon-wrapper ${item.rarity}">
+          <div class="rarity-chip ${item.rarity}">
+            <span class="rarity-dot"></span>
+            <span class="rarity-text">${rarityLabel}</span>
+          </div>
+          <img src="${item.icon}" class="item-icon" onerror="this.src='/icons/티켓.png'"/>
+        </div>
+        <div class="item-info">
+          <div class="${nameClass}">${item.name}</div>
+          <div class="item-description">${item.description || ''}</div>
+        </div>
+      `;
+
+      itemGrid.appendChild(card);
+    });
+
+    // ✅ 여기서 “딱 1번” 저장!
+    saveHistory(results, boxType);
+
+    resultSection.style.display = 'block';
+    resultSection.scrollIntoView({ behavior: 'smooth' });
+
+    // ✅ DOM 렌더 후에 높이/폰트 조정해야 정확함
+    requestAnimationFrame(() => {
+      fitDescriptions(itemGrid);
+      markLongDescriptions(itemGrid);
+    });
+  }
+
+  normalGachaBtn?.addEventListener('click', () => displayResults(drawGacha(false), 'normal'));
+  premiumGachaBtn?.addEventListener('click', () => displayResults(drawGacha(true), 'premium'));
+
+  // =========================
+  // download (네가 쓰던거 유지)
+  // =========================
+  downloadBtn?.addEventListener('click', async () => {
+    const loadH2C = () =>
+      new Promise((resolve, reject) => {
+        // @ts-ignore
+        if (window.html2canvas) return resolve(true);
+        const script = document.createElement('script');
+        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+        script.onload = resolve;
+        script.onerror = reject;
+        document.head.appendChild(script);
+      });
+
+    const cap = document.getElementById('captureArea');
+    if (!cap) return;
+
+    const waitImages = async (root) => {
+      const imgs = Array.from(root.querySelectorAll('img'));
+      await Promise.all(
+        imgs.map((img) => new Promise((res) => {
+          if (img.complete && img.naturalWidth > 0) return res(true);
+          img.onload = () => res(true);
+          img.onerror = () => res(true);
+        }))
+      );
+    };
+
+    try {
+      await loadH2C();
+
+      // 캡처 전: 레이아웃 한 번 더 확정
+      requestAnimationFrame(() => {
+        if (itemGrid) {
+          fitDescriptions(itemGrid);
+          markLongDescriptions(itemGrid);
+        }
+      });
+      await new Promise((r) => setTimeout(r, 60));
+
+      if (document.fonts?.ready) await document.fonts.ready;
+      await waitImages(cap);
+
+      // @ts-ignore
+      const canvas = await html2canvas(cap, {
+        scale: 2,
+        backgroundColor: '#eef9ff',
+        useCORS: true,
+        allowTaint: true,
+        logging: false,
+        foreignObjectRendering: false
+      });
+
+      const link = document.createElement('a');
+      link.download = `gacha-result-${Date.now()}.png`;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    } catch (e) {
+      console.warn(e);
+    }
+  });
+</script>
+

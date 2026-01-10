@@ -1,16 +1,148 @@
 ---
-
+import Layout from '../layouts/Layout.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="홈">
+  <div class="container">
+    <h1>✨ 가챠 시스템 ✨</h1>
+    
+    <div class="welcome-section">
+      <div class="feature-card gacha-card">
+        <div class="card-header">
+          <div class="emoji">🎁</div>
+          <div class="star-decoration">★</div>
+        </div>
+        <h2>가챠</h2>
+        <p>뺑이쳐라</p>
+        <a href="/gacha" class="btn">가챠 하러 가기</a>
+      </div>
+      
+      <div class="feature-card history-card">
+        <div class="card-header">
+          <div class="emoji">📜</div>
+          <div class="star-decoration">★</div>
+        </div>
+        <h2>히스토리</h2>
+        <p>기록, 길수도</p>
+        <a href="/history" class="btn">히스토리 보기</a>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .welcome-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2.5rem;
+    margin-top: 3rem;
+  }
+  
+  .feature-card {
+    background: linear-gradient(135deg, #F0F8FF 0%, #FFFFFF 100%);
+    padding: 2.5rem;
+    border-radius: 25px;
+    text-align: center;
+    transition: all 0.3s;
+    border: 3px solid #E3F2FD;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .feature-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(108, 188, 250, 0.1) 0%, transparent 70%);
+    transition: transform 0.6s;
+  }
+  
+  .feature-card:hover::before {
+    transform: rotate(180deg);
+  }
+  
+  .feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(74, 144, 226, 0.25);
+    border-color: #5CA8F5;
+  }
+  
+  .card-header {
+    position: relative;
+    margin-bottom: 1rem;
+  }
+  
+  .emoji {
+    font-size: 5rem;
+    margin-bottom: 1rem;
+    filter: drop-shadow(0 4px 8px rgba(74, 144, 226, 0.2));
+    position: relative;
+    z-index: 1;
+  }
+  
+  .star-decoration {
+    position: absolute;
+    top: -10px;
+    right: 20%;
+    font-size: 2rem;
+    color: #FFD700;
+    animation: twinkle 2s infinite;
+  }
+  
+  @keyframes twinkle {
+    0%, 100% { opacity: 1; transform: scale(1) rotate(0deg); }
+    50% { opacity: 0.5; transform: scale(1.2) rotate(180deg); }
+  }
+  
+  .feature-card h2 {
+    background: linear-gradient(135deg, #4A90E2 0%, #5CA8F5 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+    font-weight: 900;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .feature-card p {
+    color: #546E7A;
+    margin-bottom: 2rem;
+    line-height: 1.8;
+    font-size: 1.05rem;
+    font-weight: 500;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #4A90E2 0%, #5CA8F5 100%);
+    color: white;
+    text-decoration: none;
+    padding: 1rem 2rem;
+    border-radius: 25px;
+    font-weight: 700;
+    transition: all 0.3s;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 6px 20px rgba(74, 144, 226, 0.3);
+  }
+  
+  .btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(74, 144, 226, 0.4);
+  }
+  
+  .gacha-card {
+    border-top: 5px solid #4A90E2;
+  }
+  
+  .history-card {
+    border-top: 5px solid #6CBCFA;
+  }
+</style>

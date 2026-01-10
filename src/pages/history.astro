@@ -1,0 +1,181 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="히스토리">
+  <div class="container">
+    <h1>📜 히스토리</h1>
+    
+    <div class="history-content">
+      <div id="gachaHistory" class="history-section">
+        <div id="gachaList" class="history-list">
+          <p class="empty-message">아직 가챠 기록이 없습니다.</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="clear-section">
+      <button id="clearBtn" class="clear-btn">🗑️ 모든 히스토리 삭제</button>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .history-section {
+    display: block;
+  }
+  
+  .history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .history-item {
+    background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+    padding: 1.5rem;
+    border-radius: 15px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  }
+  
+  .history-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #667eea;
+  }
+  
+  .history-date {
+    color: #666;
+    font-size: 0.9rem;
+  }
+  
+  .history-results {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+  }
+  
+  .mini-item {
+    background: white;
+    padding: 0.8rem;
+    border-radius: 10px;
+    text-align: center;
+  }
+  
+  .mini-item-name {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #333;
+  }
+  
+  .mini-item.rare .mini-item-name {
+    background: linear-gradient(135deg, #DAA520 0%, #FFD700 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .empty-message {
+    text-align: center;
+    color: #999;
+    padding: 3rem;
+    font-size: 1.1rem;
+  }
+  
+  .clear-section {
+    margin-top: 3rem;
+    text-align: center;
+  }
+  
+  .clear-btn {
+    background: #e74c3c;
+  }
+  
+  .clear-btn:hover {
+    background: #c0392b;
+  }
+</style>
+
+<script>
+  const gachaList = document.getElementById('gachaList');
+  const clearBtn = document.getElementById('clearBtn');
+
+  function renderEmpty() {
+    if (!gachaList) return;
+    gachaList.innerHTML = `<p class="empty-message">아직 가챠 기록이 없습니다.</p>`;
+  }
+
+  function safeParseHistory() {
+    try {
+      const raw = localStorage.getItem('gachaHistory');
+      if (!raw) return [];
+      const data = JSON.parse(raw);
+      return Array.isArray(data) ? data : [];
+    } catch (e) {
+      console.warn('gachaHistory JSON parse error:', e);
+      return [];
+    }
+  }
+
+  function loadGachaHistory() {
+    if (!gachaList) return;
+
+    const history = safeParseHistory();
+    if (history.length === 0) {
+      renderEmpty();
+      return;
+    }
+
+    gachaList.innerHTML = '';
+
+    // 최신이 위로 오게
+    history.slice().reverse().forEach((entry) => {
+      const timestamp = entry?.timestamp ?? entry?.time ?? Date.now();
+      const date = new Date(timestamp).toLocaleString('ko-KR');
+
+      const boxTypeRaw = entry?.boxType ?? entry?.type ?? 'normal';
+      const boxTypeText = boxTypeRaw === 'premium' ? '고급 랜덤 박스' : '일반 랜덤 박스';
+
+      const results = Array.isArray(entry?.results) ? entry.results : [];
+      const resultsHTML = results.map((r) => {
+        const rarity = r?.rarity ?? 'common';
+        const name = r?.name ?? '(이름 없음)';
+        return `
+          <div class="mini-item ${rarity}">
+            <div class="mini-item-name">${name}</div>
+          </div>
+        `;
+      }).join('');
+
+      const item = document.createElement('div');
+      item.className = 'history-item';
+      item.innerHTML = `
+        <div class="history-header">
+          <strong>🎁 ${boxTypeText} 결과</strong>
+          <span class="history-date">${date}</span>
+        </div>
+        <div class="history-results">
+          ${resultsHTML || `<div class="mini-item"><div class="mini-item-name">결과 없음</div></div>`}
+        </div>
+      `;
+      gachaList.appendChild(item);
+    });
+  }
+
+  clearBtn?.addEventListener('click', () => {
+    if (confirm('정말로 모든 히스토리를 삭제하시겠습니까?')) {
+      localStorage.removeItem('gachaHistory');
+      renderEmpty();
+    }
+  });
+
+  // 혹시 실행 타이밍 꼬여도 안전하게
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadGachaHistory);
+  } else {
+    loadGachaHistory();
+  }
+</script>

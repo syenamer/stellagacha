@@ -1,0 +1,299 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="룰렛">
+  <div class="container">
+    <h1>🎰 배수 룰렛 🎰</h1>
+    
+    <div class="roulette-section">
+      <div class="roulette-container">
+        <!-- 포인터 -->
+        <div class="pointer">▲</div>
+        
+        <!-- 룰렛 원판 -->
+        <svg id="rouletteWheel" class="wheel" viewBox="0 0 400 400">
+          <!-- 테두리 -->
+          <circle cx="200" cy="200" r="195" fill="none" stroke="#8BABD8" stroke-width="10"/>
+          
+          <!-- 8개 세그먼트 -->
+          <g id="segments">
+            <!-- 3배 (0도) - 진한 파랑 -->
+            <path d="M 200 200 L 200 5 A 195 195 0 0 1 337.98 62.02 Z" fill="#5CA8F5"/>
+            <text x="240" y="80" fill="white" font-size="32" font-weight="bold" text-anchor="middle">3배</text>
+            
+            <!-- 0배 (45도) - 흰색 -->
+            <path d="M 200 200 L 337.98 62.02 A 195 195 0 0 1 395 200 Z" fill="#FFFFFF"/>
+            <text x="310" y="150" fill="#4A90E2" font-size="32" font-weight="bold" text-anchor="middle">0배</text>
+            
+            <!-- 2배 (90도) - 연한 파랑 -->
+            <path d="M 200 200 L 395 200 A 195 195 0 0 1 337.98 337.98 Z" fill="#B8D4F0"/>
+            <text x="310" y="240" fill="#4A90E2" font-size="32" font-weight="bold" text-anchor="middle">2배</text>
+            
+            <!-- 0배 (135도) - 흰색 -->
+            <path d="M 200 200 L 337.98 337.98 A 195 195 0 0 1 200 395 Z" fill="#FFFFFF"/>
+            <text x="250" y="320" fill="#4A90E2" font-size="32" font-weight="bold" text-anchor="middle">0배</text>
+            
+            <!-- 1배 (180도) - 중간 파랑 -->
+            <path d="M 200 200 L 200 395 A 195 195 0 0 1 62.02 337.98 Z" fill="#6BB5FF"/>
+            <text x="120" y="320" fill="white" font-size="32" font-weight="bold" text-anchor="middle">1배</text>
+            
+            <!-- 0배 (225도) - 흰색 -->
+            <path d="M 200 200 L 62.02 337.98 A 195 195 0 0 1 5 200 Z" fill="#FFFFFF"/>
+            <text x="90" y="240" fill="#4A90E2" font-size="32" font-weight="bold" text-anchor="middle">0배</text>
+            
+            <!-- 2배 (270도) - 연한 파랑 -->
+            <path d="M 200 200 L 5 200 A 195 195 0 0 1 62.02 62.02 Z" fill="#B8D4F0"/>
+            <text x="90" y="150" fill="#4A90E2" font-size="32" font-weight="bold" text-anchor="middle">2배</text>
+            
+            <!-- 0배 (315도) - 흰색 -->
+            <path d="M 200 200 L 62.02 62.02 A 195 195 0 0 1 200 5 Z" fill="#FFFFFF"/>
+            <text x="150" y="80" fill="#4A90E2" font-size="32" font-weight="bold" text-anchor="middle">0배</text>
+          </g>
+          
+          <!-- 점 데코레이션 -->
+          <circle cx="200" cy="15" r="3" fill="white" opacity="0.6"/>
+          <circle cx="270" cy="30" r="3" fill="white" opacity="0.6"/>
+          <circle cx="330" cy="70" r="3" fill="white" opacity="0.6"/>
+          <circle cx="370" cy="130" r="3" fill="white" opacity="0.6"/>
+          <circle cx="385" cy="200" r="3" fill="white" opacity="0.6"/>
+          <circle cx="370" cy="270" r="3" fill="white" opacity="0.6"/>
+          <circle cx="330" cy="330" r="3" fill="white" opacity="0.6"/>
+          <circle cx="270" cy="370" r="3" fill="white" opacity="0.6"/>
+          <circle cx="200" cy="385" r="3" fill="white" opacity="0.6"/>
+          <circle cx="130" cy="370" r="3" fill="white" opacity="0.6"/>
+          <circle cx="70" cy="330" r="3" fill="white" opacity="0.6"/>
+          <circle cx="30" cy="270" r="3" fill="white" opacity="0.6"/>
+          <circle cx="15" cy="200" r="3" fill="white" opacity="0.6"/>
+          <circle cx="30" cy="130" r="3" fill="white" opacity="0.6"/>
+          <circle cx="70" cy="70" r="3" fill="white" opacity="0.6"/>
+          <circle cx="130" cy="30" r="3" fill="white" opacity="0.6"/>
+          
+          <!-- 중앙 원 -->
+          <circle cx="200" cy="200" r="60" fill="#8BABD8"/>
+          <text x="200" y="215" fill="white" font-size="20" font-weight="bold" text-anchor="middle">START</text>
+        </svg>
+      </div>
+      
+      <button id="spinBtn" class="spin-btn">
+        <span>🎲</span> 룰렛 돌리기!
+      </button>
+      
+      <div id="resultDisplay" class="result-display" style="display: none;">
+        <div id="captureArea" class="result-card">
+          <h2>✨ 결과 ✨</h2>
+          <div id="finalResult" class="final-result"></div>
+        </div>
+        <button id="downloadBtn" class="download-btn">
+          <span>📥</span> 이미지로 저장하기
+        </button>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .roulette-section {
+    text-align: center;
+    padding: 2rem;
+  }
+  
+  .roulette-container {
+    position: relative;
+    width: 450px;
+    height: 500px;
+    margin: 2rem auto;
+  }
+  
+  .pointer {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 4rem;
+    color: #8BABD8;
+    z-index: 100;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+  }
+  
+  .wheel {
+    width: 400px;
+    height: 400px;
+    margin: 50px auto 0;
+    transition: transform 3s cubic-bezier(0.17, 0.67, 0.12, 0.99);
+    filter: drop-shadow(0 10px 30px rgba(74, 144, 226, 0.3));
+  }
+  
+  .wheel.spinning {
+    transition: transform 3s cubic-bezier(0.17, 0.67, 0.12, 0.99);
+  }
+  
+  .spin-btn {
+    font-size: 1.8rem;
+    padding: 1.5rem 3rem;
+    margin: 2rem auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .spin-btn span {
+    font-size: 2rem;
+  }
+  
+  .result-display {
+    margin-top: 3rem;
+    animation: fadeIn 0.5s ease-in;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .result-card {
+    background: linear-gradient(135deg, #F0F8FF 0%, #FFFFFF 100%);
+    padding: 3rem;
+    border-radius: 25px;
+    border: 3px solid #E3F2FD;
+    box-shadow: 0 10px 30px rgba(74, 144, 226, 0.2);
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  
+  .result-card h2 {
+    background: linear-gradient(135deg, #4A90E2 0%, #5CA8F5 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    font-weight: 900;
+  }
+  
+  .final-result {
+    font-size: 5rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, #4A90E2 0%, #5CA8F5 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 1rem 0;
+    animation: resultPop 0.5s ease-out;
+  }
+  
+  @keyframes resultPop {
+    0% { transform: scale(0); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+  }
+  
+  .download-btn {
+    margin-top: 2rem;
+    background: linear-gradient(135deg, #5CA8F5 0%, #4A90E2 100%);
+    font-size: 1.2rem;
+    padding: 1rem 2rem;
+  }
+  
+  .download-btn span {
+    margin-right: 0.5rem;
+  }
+</style>
+
+<script>
+  const spinBtn = document.getElementById('spinBtn');
+  const wheel = document.getElementById('rouletteWheel');
+  const resultDisplay = document.getElementById('resultDisplay');
+  const finalResult = document.getElementById('finalResult');
+  const downloadBtn = document.getElementById('downloadBtn');
+  
+  // 8개 세그먼트: 3배, 0배, 2배, 0배, 1배, 0배, 2배, 0배
+  const results = ['3배', '0배', '2배', '0배', '1배', '0배', '2배', '0배'];
+  let isSpinning = false;
+  let currentRotation = 0;
+
+  function spinRoulette() {
+    if (isSpinning) return;
+    
+    isSpinning = true;
+    spinBtn.disabled = true;
+    resultDisplay.style.display = 'none';
+    
+    // 랜덤 결과 선택
+    const randomIndex = Math.floor(Math.random() * 8);
+    const result = results[randomIndex];
+    
+    // 각 세그먼트는 45도
+    const segmentAngle = 45;
+    const targetAngle = randomIndex * segmentAngle;
+    
+    // 5바퀴 + 목표 각도 (위쪽 화살표 기준)
+    const spins = 5;
+    const finalRotation = currentRotation + (360 * spins) + (360 - targetAngle);
+    
+    if (wheel) {
+      wheel.classList.add('spinning');
+      wheel.style.transform = `rotate(${finalRotation}deg)`;
+    }
+    
+    currentRotation = finalRotation % 360;
+    
+    // 3초 후 결과 표시
+    setTimeout(() => {
+      if (wheel) {
+        wheel.classList.remove('spinning');
+      }
+      
+      if (finalResult) {
+        finalResult.textContent = result;
+      }
+      
+      resultDisplay.style.display = 'block';
+      saveToHistory(result);
+      
+      isSpinning = false;
+      spinBtn.disabled = false;
+    }, 3000);
+  }
+
+  function saveToHistory(result: string) {
+    const history = JSON.parse(localStorage.getItem('rouletteHistory') || '[]');
+    const newEntry = {
+      id: Date.now(),
+      type: 'roulette',
+      timestamp: new Date().toISOString(),
+      result: result
+    };
+    history.unshift(newEntry);
+    localStorage.setItem('rouletteHistory', JSON.stringify(history));
+  }
+
+  spinBtn?.addEventListener('click', spinRoulette);
+
+  downloadBtn?.addEventListener('click', async () => {
+    try {
+      const script = document.createElement('script');
+      script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+      document.head.appendChild(script);
+      
+      script.onload = async () => {
+        const captureArea = document.getElementById('captureArea');
+        if (!captureArea) return;
+        
+        // @ts-ignore
+        const canvas = await html2canvas(captureArea, {
+          backgroundColor: '#F0F8FF',
+          scale: 2
+        });
+        
+        const link = document.createElement('a');
+        link.download = `roulette-result-${Date.now()}.png`;
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+      };
+    } catch (error) {
+      console.error('이미지 다운로드 실패:', error);
+      alert('이미지 다운로드에 실패했습니다.');
+    }
+  });
+</script>
