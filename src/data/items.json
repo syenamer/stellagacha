@@ -626,7 +626,7 @@
     "id": 90,
     "name": "금니",
     "description": "심을 수는 없다.",
-    "icon": "/icons/키트_별빛상자.gif",
+    "icon": "/icons/금니.png",
     "rarity": "rare"
   },
   {
@@ -640,14 +640,14 @@
     "id": 92,
     "name": "파인애플 패드",
     "description": "최신형 태블릿!",
-    "icon": "/icons/키트_별빛상자.gif",
+    "icon": "/icons/파인애플패드.png",
     "rarity": "rare"
   },
   {
     "id": 93,
     "name": "황금 나뭇가지 (도색)",
     "description": "살살 긁으면 금박이 벗겨진다.",
-    "icon": "/icons/키트_별빛상자.gif",
+    "icon": "/icons/황금나뭇가지.png",
     "rarity": "rare"
   },
   {
@@ -710,7 +710,7 @@
     "id": 102,
     "name": "황금 똥",
     "description": "껍데기를 벗기면 먹을 수 있는 초콜릿.",
-    "icon": "/icons/키트_별빛상자.gif",
+    "icon": "/icons/황금똥.png",
     "rarity": "rare"
   },
   {
@@ -745,7 +745,7 @@
     "id": 107,
     "name": "대나무 피리",
     "description": "쉽게 불기 힘들지만, 제대로 불면 좋은 소리가 난다.",
-    "icon": "/icons/키트_별빛상자.gif",
+    "icon": "/icons/대나무피리.png",
     "rarity": "rare"
   },
   {
@@ -766,7 +766,7 @@
     "id": 110,
     "name": "난파선 미니어처",
     "description": "바닥 부분에는 파도도 구현되어 있다.",
-    "icon": "/icons/키트_별빛상자.gif",
+    "icon": "/icons/난파선.png",
     "rarity": "rare"
   },
   {
@@ -913,7 +913,7 @@
     "id": 130,
     "name": "1kg 누X라 잼",
     "description": "영원히 누텔X만 먹을 수 있다.",
-    "icon": "/icons/키트_별빛상자.gif",
+    "icon": "/icons/누텔라.png",
     "rarity": "rare"
   },
   {
@@ -934,7 +934,7 @@
     "id": 133,
     "name": "쫀딕쿠키",
     "description": "쫀딕쿠키 유행은 2061년에도 현재진행중!",
-    "icon": "/icons/키트_별빛상자.gif",
+    "icon": "/icons/쫀딕쿠키.png",
     "rarity": "rare"
   },
   {
@@ -969,7 +969,7 @@
     "id": 138,
     "name": "죽마",
     "description": "세상 모두를 내려다볼 수 있다.",
-    "icon": "/icons/키트_별빛상자.gif",
+    "icon": "/icons/죽마.png",
     "rarity": "rare"
   },
   {
@@ -983,7 +983,7 @@
     "id": 140,
     "name": "형광 별 스티커",
     "description": "침대 머리맡에 붙여 보자.",
-    "icon": "/icons/키트_별빛상자.gif",
+    "icon": "/icons/별스티커.png",
     "rarity": "rare"
   },
   {
@@ -1006,5 +1006,12 @@
     "description": "절대 뒤집히지 않는 전설의 딱지.",
     "icon": "/icons/장난감-황금딱지.png",
     "rarity": "rare"
+  },
+  {
+    "id": 144,
+    "name": "교장 선생님 다키마쿠라",
+    "description": "껴안고 잘 수 있다!",
+    "icon": "/icons/교장.png",
+    "rarity": "common"
   }
 ]
