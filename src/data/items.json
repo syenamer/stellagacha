@@ -38,7 +38,7 @@
     "id": 6,
     "name": "교장 선생님 다키마쿠라",
     "description": "껴안고 잘 수 있다!",
-    "icon": "/icons/키트_별빛상자.gif",
+    "icon": "/icons/교장.png",
     "rarity": "common"
   },
   {
@@ -185,7 +185,7 @@
     "id": 27,
     "name": "교장 선생님 발매트",
     "description": "Welcome♥",
-    "icon": "/icons/키트_별빛상자.gif",
+    "icon": "/icons/교장.png",
     "rarity": "common"
   },
   {
@@ -682,7 +682,7 @@
     "id": 98,
     "name": "★교장 선생님 리즈 시절 사진★",
     "description": "너무 아름다워서 똑바로 쳐다볼 수 없다.",
-    "icon": "/icons/키트_별빛상자.gif",
+    "icon": "/icons/교장리즈.png",
     "rarity": "rare"
   },
   {
