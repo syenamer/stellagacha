@@ -332,14 +332,14 @@
     "id": 46,
     "name": "똥 말랑이",
     "description": "진짜 똥은 아니다. 아마도?",
-    "icon": "/icons/키트_별빛상자.gif",
+    "icon": "/icons/응가_3단.png",
     "rarity": "common"
   },
   {
     "id": 47,
     "name": "캐릭터 키링",
     "description": "2050년대에 유행했던 로봇 애니메이션 캐릭터다.",
-    "icon": "/icons/키트_별빛상자.gif",
+    "icon": "/icons/44.png",
     "rarity": "common"
   },
   {
@@ -367,7 +367,7 @@
     "id": 51,
     "name": "어린이 성가대 가운",
     "description": "가운을 걸치고 성가를 불러 보자.",
-    "icon": "/icons/키트_별빛상자.gif",
+    "icon": "/icons/흰 드레스.png",
     "rarity": "common"
   },
   {
@@ -402,7 +402,7 @@
     "id": 56,
     "name": "감기약",
     "description": "딸기맛인 줄 알았지? 호박맛이다.",
-    "icon": "/icons/키트_별빛상자.gif",
+    "icon": "/icons/의약품-진통제.png",
     "rarity": "common"
   },
   {
@@ -416,14 +416,14 @@
     "id": 58,
     "name": "모 라이트노벨 13권",
     "description": "청순한 미소녀 히로인이 유명한 라이트노벨.",
-    "icon": "/icons/키트_별빛상자.gif",
+    "icon": "/icons/16.png",
     "rarity": "common"
   },
   {
     "id": 59,
     "name": "「시호와 여동생」 1권",
     "description": "아기 거북 시호와 여동생 시아의 일상을 담은 동화책. 28권까지 나왔다.",
-    "icon": "/icons/키트_별빛상자.gif",
+    "icon": "/icons/13.png",
     "rarity": "common"
   },
   {
@@ -437,14 +437,14 @@
     "id": 61,
     "name": "장난감 화장품",
     "description": "진짜 화장이 되지는 않는다.",
-    "icon": "/icons/키트_별빛상자.gif",
+    "icon": "/icons/립스틱.png",
     "rarity": "common"
   },
   {
     "id": 62,
     "name": "장난감 칼",
     "description": "번쩍번쩍한 불빛이 나온다.",
-    "icon": "/icons/키트_별빛상자.gif",
+    "icon": "/icons/검_강화4.gif",
     "rarity": "common"
   },
   {
@@ -808,21 +808,21 @@
     "id": 116,
     "name": "쉽게 배우는 동양 철학사",
     "description": "엄청나게 어렵다. 누가 이런 책을 읽지?",
-    "icon": "/icons/키트_별빛상자.gif",
+    "icon": "/icons/8.png",
     "rarity": "rare"
   },
   {
     "id": 117,
     "name": "녹색 표지 공책",
     "description": "장 수가 표시되는 곳에 생활의 팁이 함께 적혀 있다.",
-    "icon": "/icons/키트_별빛상자.gif",
+    "icon": "/icons/책_녹색.png",
     "rarity": "rare"
   },
   {
     "id": 118,
     "name": "겨우살이 향초",
     "description": "약초 향이 난다. 건강해지는 듯한 기분이 든다.",
-    "icon": "/icons/키트_별빛상자.gif",
+    "icon": "/icons/문구-향초.png",
     "rarity": "rare"
   },
   {
@@ -843,7 +843,7 @@
     "id": 121,
     "name": "스키 부츠",
     "description": "어린이 발에 꼭 맞는 사이즈.",
-    "icon": "/icons/키트_별빛상자.gif",
+    "icon": "/icons/부츠.png",
     "rarity": "rare"
   },
   {
@@ -878,14 +878,14 @@
     "id": 125,
     "name": "몰약나무 향수",
     "description": "특유의 쌉싸르레한 향이 매력적이다.",
-    "icon": "/icons/키트_별빛상자.gif",
+    "icon": "/icons/기타-향수오일.png",
     "rarity": "rare"
   },
   {
     "id": 126,
     "name": "일기장",
     "description": "안타깝게도 다른 사람의 것은 아니다.",
-    "icon": "/icons/키트_별빛상자.gif",
+    "icon": "/icons/서적-일기장.png",
     "rarity": "rare"
   },
   {
