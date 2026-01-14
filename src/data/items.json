@@ -276,7 +276,7 @@
     "id": 39,
     "name": "0점짜리 시험지",
     "description": "글자가 못생겨서 알아볼 수가 없다.",
-    "icon": "/icons/키트_별빛상자.gif",
+    "icon": "/icons/0점시험지.png",
     "rarity": "common"
   },
   {
@@ -290,7 +290,7 @@
     "id": 41,
     "name": "분홍색 마트료시카 인형",
     "description": "꽃이 가득 그려져 있다.",
-    "icon": "/icons/키트_별빛상자.gif",
+    "icon": "/icons/마트료시카.png",
     "rarity": "common"
   },
   {
@@ -304,28 +304,28 @@
     "id": 43,
     "name": "손 잡는 자석 양말 한 켤레",
     "description": "친구와 나누어 신어 보자.",
-    "icon": "/icons/키트_별빛상자.gif",
+    "icon": "/icons/양말.png",
     "rarity": "common"
   },
   {
     "id": 44,
     "name": "싸구려 열쇠고리",
     "description": "낡은 인형이 대롱 달려 있다.",
-    "icon": "/icons/키트_별빛상자.gif",
+    "icon": "/icons/열쇠고리.png",
     "rarity": "common"
   },
   {
     "id": 45,
     "name": "고전 게임기",
     "description": "2025년에 발매된 귀한 휴대용 콘솔이다.",
-    "icon": "/icons/키트_별빛상자.gif",
+    "icon": "/icons/장난감-게임기.png",
     "rarity": "common"
   },
    {
     "id": 45,
     "name": "장난감 왕관",
     "description": "이것만 있으면 나도 왕자님!",
-    "icon": "/icons/키트_별빛상자.gif",
+    "icon": "/icons/왕관.png",
     "rarity": "common"
   },
   {
@@ -346,21 +346,21 @@
     "id": 48,
     "name": "빨간 선글라스",
     "description": "쓰면 온 세상이 빨갛게 보인다.",
-    "icon": "/icons/키트_별빛상자.gif",
+    "icon": "/icons/선글라스.png",
     "rarity": "common"
   },
   {
     "id": 49,
     "name": "100점짜리 시험지",
     "description": "반듯한 서명으로 서유안의 이름이 적혀 있다.",
-    "icon": "/icons/키트_별빛상자.gif",
+    "icon": "/icons/100점시험지.png",
     "rarity": "common"
   },
   {
     "id": 50,
     "name": "비니",
     "description": "겨울에 쓰기 좋다.",
-    "icon": "/icons/키트_별빛상자.gif",
+    "icon": "/icons/비니.png",
     "rarity": "common"
   },
   {
@@ -374,21 +374,21 @@
     "id": 52,
     "name": "바통",
     "description": "이걸 쥐고 달리면 평소보다 더 빨리 달릴 수 있을 것 같다.",
-    "icon": "/icons/키트_별빛상자.gif",
+    "icon": "/icons/바통.png",
     "rarity": "common"
   },
   {
     "id": 53,
     "name": "스노우볼",
     "description": "작은 눈사람 두 개가 장식되어 있다.",
-    "icon": "/icons/키트_별빛상자.gif",
+    "icon": "/icons/스노우볼.png",
     "rarity": "common"
   },
   {
     "id": 54,
     "name": "도급 장갑",
     "description": "황금 장갑이 아니다.",
-    "icon": "/icons/키트_별빛상자.gif",
+    "icon": "/icons/도금장갑.png",
     "rarity": "common"
   },
   {
