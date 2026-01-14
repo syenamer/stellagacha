@@ -578,93 +578,64 @@ import itemsData from '../data/items.json';
   // =========================
   // download (네가 쓰던거 유지)
   // =========================
-  // =========================
-// download → GIF로 변경
-// =========================
-downloadBtn?.addEventListener('click', async () => {
-  const loadH2C = () =>
-    new Promise((resolve, reject) => {
-      if (window.html2canvas) return resolve(true);
-      const script = document.createElement('script');
-      script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
-      script.onload = resolve;
-      script.onerror = reject;
-      document.head.appendChild(script);
-    });
+  downloadBtn?.addEventListener('click', async () => {
+    const loadH2C = () =>
+      new Promise((resolve, reject) => {
+        // @ts-ignore
+        if (window.html2canvas) return resolve(true);
+        const script = document.createElement('script');
+        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+        script.onload = resolve;
+        script.onerror = reject;
+        document.head.appendChild(script);
+      });
 
-  // ✅ gif.js 로드
-  const loadGifJS = () =>
-    new Promise((resolve, reject) => {
-      if (window.GIF) return resolve(true);
-      const script = document.createElement('script');
-      script.src = 'https://cdn.jsdelivr.net/npm/gif.js@0.2.0/dist/gif.js';
-      script.onload = resolve;
-      script.onerror = reject;
-      document.head.appendChild(script);
-    });
+    const cap = document.getElementById('captureArea');
+    if (!cap) return;
 
-  const cap = document.getElementById('captureArea');
-  if (!cap) return;
+    const waitImages = async (root) => {
+      const imgs = Array.from(root.querySelectorAll('img'));
+      await Promise.all(
+        imgs.map((img) => new Promise((res) => {
+          if (img.complete && img.naturalWidth > 0) return res(true);
+          img.onload = () => res(true);
+          img.onerror = () => res(true);
+        }))
+      );
+    };
 
-  const waitImages = async (root) => {
-    const imgs = Array.from(root.querySelectorAll('img'));
-    await Promise.all(
-      imgs.map((img) => new Promise((res) => {
-        if (img.complete && img.naturalWidth > 0) return res(true);
-        img.onload = () => res(true);
-        img.onerror = () => res(true);
-      }))
-    );
-  };
+    try {
+      await loadH2C();
 
-  try {
-    // ✅ 둘 다 로드
-    await Promise.all([loadH2C(), loadGifJS()]);
+      // 캡처 전: 레이아웃 한 번 더 확정
+      requestAnimationFrame(() => {
+        if (itemGrid) {
+          fitDescriptions(itemGrid);
+          markLongDescriptions(itemGrid);
+        }
+      });
+      await new Promise((r) => setTimeout(r, 60));
 
-    requestAnimationFrame(() => {
-      if (itemGrid) {
-        fitDescriptions(itemGrid);
-        markLongDescriptions(itemGrid);
-      }
-    });
-    await new Promise((r) => setTimeout(r, 60));
+      if (document.fonts?.ready) await document.fonts.ready;
+      await waitImages(cap);
 
-    if (document.fonts?.ready) await document.fonts.ready;
-    await waitImages(cap);
+      // @ts-ignore
+      const canvas = await html2canvas(cap, {
+        scale: 2,
+        backgroundColor: '#eef9ff',
+        useCORS: true,
+        allowTaint: true,
+        logging: false,
+        foreignObjectRendering: false
+      });
 
-    // ✅ html2canvas로 이미지 생성
-    const canvas = await html2canvas(cap, {
-      scale: 2,
-      backgroundColor: '#eef9ff',
-      useCORS: true,
-      allowTaint: true,
-      logging: false,
-      foreignObjectRendering: false
-    });
-
-    // ✅ GIF 생성
-    const gif = new GIF({
-      workers: 2,
-      quality: 10,
-      workerScript: 'https://cdn.jsdelivr.net/npm/gif.js@0.2.0/dist/gif.worker.js'
-    });
-
-    // ✅ 1프레임만 추가 (정지 이미지 GIF)
-    gif.addFrame(canvas, { delay: 100 });
-
-    gif.on('finished', (blob) => {
       const link = document.createElement('a');
       link.download = `gacha-result-${Date.now()}.gif`;
-      link.href = URL.createObjectURL(blob);
+      link.href = canvas.toDataURL('image/gif');
       link.click();
-    });
-
-    gif.render();
-
-  } catch (e) {
-    console.warn('GIF 생성 실패:', e);
-    alert('GIF 저장에 실패했습니다.');
-  }
-});
+    } catch (e) {
+      console.warn(e);
+    }
+  });
 </script>
 
