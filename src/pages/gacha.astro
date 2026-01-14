@@ -630,8 +630,8 @@ import itemsData from '../data/items.json';
       });
 
       const link = document.createElement('a');
-      link.download = `gacha-result-${Date.now()}.gif`;
-      link.href = canvas.toDataURL('image/gif');
+      link.download = `gacha-result-${Date.now()}.png`;
+      link.href = canvas.toDataURL('image/png');
       link.click();
     } catch (e) {
       console.warn(e);
