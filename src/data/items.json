@@ -442,16 +442,16 @@
   },
   {
     "id": 63,
-    "name": "아기 물소 인형",
+    "name": "물소 인형",
     "description": "누군가를 꼭 닮은 모습의 인형이다.",
-    "icon": "/icons/키트_별빛상자.gif",
+    "icon": "/icons/인형.png",
     "rarity": "common"
   },
   {
     "id": 64,
-    "name": "아기 낙타 인형",
+    "name": "낙타 인형",
     "description": "누군가를 꼭 닮은 모습의 인형이다.",
-    "icon": "/icons/키트_별빛상자.gif",
+    "icon": "/icons/인형.png",
     "rarity": "common"
   },
   {
@@ -463,9 +463,9 @@
   },
   {
     "id": 66,
-    "name": "아기 아델리 펭귄 인형",
+    "name": "아델리 펭귄 인형",
     "description": "누군가를 꼭 닮은 모습의 인형이다.",
-    "icon": "/icons/키트_별빛상자.gif",
+    "icon": "/icons/인형.png",
     "rarity": "common"
   },
   {
@@ -491,9 +491,9 @@
   },
   {
     "id": 70,
-    "name": "아기 올빼미 인형",
+    "name": "올빼미 인형",
     "description": "누군가를 꼭 닮은 모습의 인형이다.",
-    "icon": "/icons/키트_별빛상자.gif",
+    "icon": "/icons/인형.png",
     "rarity": "common"
   },
   {
@@ -519,23 +519,23 @@
   },
   {
     "id": 74,
-    "name": "아기 늑대 인형",
+    "name": "늑대 인형",
     "description": "누군가를 꼭 닮은 모습의 인형이다.",
-    "icon": "/icons/키트_별빛상자.gif",
+    "icon": "/icons/인형.png",
     "rarity": "common"
   },
   {
     "id": 75,
-    "name": "아기 염소 인형",
+    "name": "염소 인형",
     "description": "누군가를 꼭 닮은 모습의 인형이다.",
-    "icon": "/icons/키트_별빛상자.gif",
+    "icon": "/icons/인형.png",
     "rarity": "common"
   },
   {
     "id": 76,
-    "name": "아기 보더콜리 인형",
+    "name": "보더콜리 인형",
     "description": "누군가를 꼭 닮은 모습의 인형이다.",
-    "icon": "/icons/키트_별빛상자.gif",
+    "icon": "/icons/인형.png",
     "rarity": "common"
   },
   {
@@ -547,37 +547,37 @@
   },
   {
     "id": 78,
-    "name": "아기 설표 인형",
+    "name": "설표 인형",
     "description": "누군가를 꼭 닮은 모습의 인형이다.",
-    "icon": "/icons/키트_별빛상자.gif",
+    "icon": "/icons/인형.png",
     "rarity": "common"
   },
   {
     "id": 79,
-    "name": "아기 당나귀 인형",
+    "name": "당나귀 인형",
     "description": "누군가를 꼭 닮은 모습의 인형이다.",
-    "icon": "/icons/키트_별빛상자.gif",
+    "icon": "/icons/인형.png",
     "rarity": "common"
   },
   {
     "id": 80,
-    "name": "아기 독수리 인형",
+    "name": "독수리 인형",
     "description": "누군가를 꼭 닮은 모습의 인형이다.",
-    "icon": "/icons/키트_별빛상자.gif",
+    "icon": "/icons/인형.png",
     "rarity": "common"
   },
   {
     "id": 81,
-    "name": "아기 파랑새 인형",
+    "name": "파랑새 인형",
     "description": "누군가를 꼭 닮은 모습의 인형이다.",
-    "icon": "/icons/키트_별빛상자.gif",
+    "icon": "/icons/인형.png",
     "rarity": "common"
   },
   {
     "id": 82,
-    "name": "아기 쥐 인형",
+    "name": "쥐 인형",
     "description": "누군가를 꼭 닮은 모습의 인형이다.",
-    "icon": "/icons/키트_별빛상자.gif",
+    "icon": "/icons/인형.png",
     "rarity": "common"
   },
   {
@@ -596,9 +596,9 @@
   },
   {
     "id": 85,
-    "name": "아기 거미 인형",
+    "name": "거미 인형",
     "description": "누군가를 꼭 닮은 모습의 인형이다.",
-    "icon": "/icons/키트_별빛상자.gif",
+    "icon": "/icons/인형.png",
     "rarity": "common"
   },
   {
