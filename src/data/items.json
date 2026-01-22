@@ -35,13 +35,6 @@
     "rarity": "common"
   },
   {
-    "id": 6,
-    "name": "교장 선생님 다키마쿠라",
-    "description": "껴안고 잘 수 있다!",
-    "icon": "/icons/교장.png",
-    "rarity": "common"
-  },
-  {
     "id": 7,
     "name": "장난감 지렁이",
     "description": "같은 시리즈로 장난감 송충이가 있다.",
@@ -1011,6 +1004,13 @@
     "id": 144,
     "name": "교장 선생님 다키마쿠라",
     "description": "껴안고 잘 수 있다!",
+    "icon": "/icons/교장.png",
+    "rarity": "common"
+  },
+  {
+    "id": 145,
+    "name": "NEW! 교장 선생님 다키마쿠라",
+    "description": "새로운 버전이 나왔다.",
     "icon": "/icons/교장.png",
     "rarity": "common"
   }
