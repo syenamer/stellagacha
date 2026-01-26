@@ -512,9 +512,9 @@
   },
   {
     "id": 73,
-    "name": "아기 따오기 인형",
+    "name": "따오기 인형",
     "description": "누군가를 꼭 닮은 모습의 인형이다.",
-    "icon": "/icons/키트_별빛상자.gif",
+    "icon": "/icons/인형.png",
     "rarity": "common"
   },
   {
@@ -589,9 +589,9 @@
   },
   {
     "id": 84,
-    "name": "아기 거북 인형",
+    "name": "거북 인형",
     "description": "누군가를 꼭 닮은 모습의 인형이다.",
-    "icon": "/icons/키트_별빛상자.gif",
+    "icon": "/icons/인형.png",
     "rarity": "common"
   },
   {
