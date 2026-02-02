@@ -1013,5 +1013,12 @@
     "description": "새로운 버전이 나왔다.",
     "icon": "/icons/교장.png",
     "rarity": "common"
+  },
+  {
+    "id": 146,
+    "name": "휴가! 교장 선생님 다키마쿠라",
+    "description": "수학여행 기념 한정판!",
+    "icon": "/icons/교장.png",
+    "rarity": "common"
   }
 ]
