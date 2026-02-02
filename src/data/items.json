@@ -477,9 +477,9 @@
   },
   {
     "id": 68,
-    "name": "아기 스핑크스 고양이 인형",
+    "name": "스핑크스 고양이 인형",
     "description": "누군가를 꼭 닮은 모습의 인형이다.",
-    "icon": "/icons/키트_별빛상자.gif",
+    "icon": "/icons/인형.png",
     "rarity": "common"
   },
   {
@@ -498,9 +498,9 @@
   },
   {
     "id": 71,
-    "name": "아기 양 인형",
+    "name": "양 인형",
     "description": "누군가를 꼭 닮은 모습의 인형이다.",
-    "icon": "/icons/키트_별빛상자.gif",
+    "icon": "/icons/인형.png",
     "rarity": "common"
   },
   {
@@ -582,9 +582,9 @@
   },
   {
     "id": 83,
-    "name": "아기 라쿤 인형",
+    "name": "라쿤 인형",
     "description": "누군가를 꼭 닮은 모습의 인형이다.",
-    "icon": "/icons/키트_별빛상자.gif",
+    "icon": "/icons/인형.png",
     "rarity": "common"
   },
   {
