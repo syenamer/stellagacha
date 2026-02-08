@@ -559,13 +559,7 @@
     "icon": "/icons/인형.png",
     "rarity": "common"
   },
-  {
-    "id": 80,
-    "name": "독수리 인형",
-    "description": "누군가를 꼭 닮은 모습의 인형이다.",
-    "icon": "/icons/인형.png",
-    "rarity": "common"
-  },
+
   {
     "id": 81,
     "name": "파랑새 인형",
