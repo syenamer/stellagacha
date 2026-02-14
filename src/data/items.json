@@ -456,9 +456,9 @@
   },
   {
     "id": 65,
-    "name": "아기 아홀로틀 인형",
+    "name": "아홀로틀 인형",
     "description": "누군가를 꼭 닮은 모습의 인형이다.",
-    "icon": "/icons/키트_별빛상자.gif",
+    "icon": "/icons/인형.png",
     "rarity": "common"
   },
   {
@@ -470,9 +470,9 @@
   },
   {
     "id": 67,
-    "name": "아기 사자 인형",
+    "name": "사자 인형",
     "description": "누군가를 꼭 닮은 모습의 인형이다.",
-    "icon": "/icons/키트_별빛상자.gif",
+    "icon": "/icons/인형.png",
     "rarity": "common"
   },
   {
